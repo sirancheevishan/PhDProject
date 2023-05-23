@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <title>Fraction Form</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            border: 2px dashed green;
+            padding: 1%;
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Fraction Form</h1>
+        <form id="fractionForm">
+            <label for="numericValue">P Value:</label>
+            <input type="number" id="numericValue" required>
+
+            <label for="fractionValue">Numerator:</label>
+            <input type="number" id="fractionValue" required>
+
+            <label for="fractionValue">Denominator:</label>
+            <input type="number" id="fractionValue2" required>
+
+            <input type="button" value="Submit" class="btn" onclick="CalculateTheValues()">
+            <button type="submit" style="display: none;">Submit</button>
+        </form>
+        <div id="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        
+        $('input[type=number]').on('input', function () {
+            $("#result").hide();
+            var inputValue = $(this).val();
+
+            if (inputValue < 0) {
+                $(this).val(0);
+            }
+        });
+        function CalculateTheValues() {
+            $("#result").hide();
+            var p = $("#numericValue").val();
+            var x = $("#fractionValue").val();
+            var y = $("#fractionValue2").val();
+            var Total = 1;
+            var Count = 0;
+            var Number = x % p == 0 ? x : y;
+
+            var isLoopStop = false;
+            var Count = 0;
+            var Total = 1;
+            while (!isLoopStop) {
+                Count++;
+                Number = Number / p;
+                if (Number % p != 0) {
+                    isLoopStop = true;
+                }
+                Total = Total * p;
+            }
+            if (x % p == 0) {
+                $("#result").show();
+                $("#result").html("The answer is 1 / " + Total)
+            }
+            else if (y % p == 0) {
+                $("#result").show();
+                $("#result").html("The answer is " + Total);
+            }
+            else {
+                $("#result").show();
+                $("#result").html("The answer is 0");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
